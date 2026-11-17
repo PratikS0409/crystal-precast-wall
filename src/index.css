@@ -1,0 +1,274 @@
+@import "tailwindcss";
+
+:root {
+  --color-primary: #c69c4d;
+  --color-primary-hover: #d4af63;
+  --color-primary-deep: #b0883c;
+  --color-secondary: #181a1d;
+  --color-background: #f4f3f0;
+  --color-background-alt: #eae8e3;
+  --color-surface: #ffffff;
+  --color-dark-background: #111214;
+  --color-dark-surface: #181a1d;
+  --color-dark-surface-muted: #25282d;
+  --color-text: #1c1e21;
+  --color-muted: #52565c;
+  --color-text-light: #f4f3f0;
+  --color-text-light-muted: #a3a8b0;
+  --color-border: #d6d3cc;
+  --color-border-dark: rgba(255, 255, 255, 0.12);
+  --color-accent: #d4af63;
+
+  --font-heading: "Outfit", ui-sans-serif, system-ui, sans-serif;
+  --font-body: "DM Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+
+  --type-hero: clamp(2.15rem, 7vw, 5.25rem);
+  --type-h1: clamp(2rem, 5vw, 4.25rem);
+  --type-h2: clamp(1.85rem, 3.6vw, 3.1rem);
+  --type-h3: clamp(1.25rem, 2.1vw, 1.85rem);
+  --type-body-large: clamp(1rem, 1.25vw, 1.18rem);
+  --type-body: clamp(0.95rem, 1.05vw, 1.02rem);
+  --type-body-small: 0.875rem;
+  --type-label: 0.75rem;
+
+  --layout-max-width: 1440px;
+  --section-padding-desktop: 112px;
+  --section-padding-tablet: 80px;
+  --section-padding-mobile: 56px;
+  --container-padding: clamp(1.25rem, 4vw, 3rem);
+
+  --radius-small: 2px;
+  --radius-medium: 4px;
+  --radius-large: 10px;
+
+  --btn-py: 0.875rem;
+  --btn-px: 1.75rem;
+  --btn-font-size: 0.75rem;
+  --btn-letter-spacing: 0.14em;
+  --btn-radius: 2px;
+}
+
+@layer base {
+  html,
+  body {
+    overflow-x: clip;
+  }
+
+  html {
+    font-family: var(--font-body);
+    scroll-behavior: smooth;
+    background-color: var(--color-background);
+    color: var(--color-text);
+  }
+
+  ::selection {
+    background-color: color-mix(in srgb, var(--color-primary) 26%, transparent);
+    color: var(--color-text);
+  }
+
+  html.lenis,
+  html.lenis body {
+    height: auto;
+  }
+
+  .lenis.lenis-smooth {
+    scroll-behavior: auto !important;
+  }
+
+  .lenis.lenis-smooth [data-lenis-prevent] {
+    overscroll-behavior: contain;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  .font-heading {
+    font-family: var(--font-heading);
+  }
+
+  body,
+  p,
+  button,
+  a,
+  label,
+  input,
+  select,
+  textarea {
+    font-family: var(--font-body);
+  }
+
+  .font-mono-tabular {
+    font-family: var(--font-mono);
+    font-variant-numeric: tabular-nums;
+  }
+}
+
+@layer components {
+  /* Centralized Typography System */
+  .heading-display {
+    font-family: var(--font-heading);
+    font-size: var(--type-hero);
+    font-weight: 700;
+    line-height: 1.03;
+    letter-spacing: -0.025em;
+    text-wrap: balance;
+  }
+
+  .heading-xl {
+    font-family: var(--font-heading);
+    font-size: var(--type-h1);
+    font-weight: 700;
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    text-wrap: balance;
+  }
+
+  .heading-lg {
+    font-family: var(--font-heading);
+    font-size: var(--type-h2);
+    font-weight: 700;
+    line-height: 1.08;
+    letter-spacing: -0.02em;
+    text-wrap: balance;
+  }
+
+  .heading-md {
+    font-family: var(--font-heading);
+    font-size: var(--type-h3);
+    font-weight: 600;
+    line-height: 1.2;
+    letter-spacing: -0.015em;
+  }
+
+  .body-large {
+    font-family: var(--font-body);
+    font-size: var(--type-body-large);
+    line-height: 1.65;
+  }
+
+  .body-normal {
+    font-family: var(--font-body);
+    font-size: var(--type-body);
+    line-height: 1.68;
+  }
+
+  .body-small {
+    font-family: var(--font-body);
+    font-size: var(--type-body-small);
+    line-height: 1.6;
+  }
+
+  .label-uppercase {
+    font-family: var(--font-mono);
+    font-variant-numeric: tabular-nums;
+    font-size: var(--type-label);
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+  }
+
+  /* Centralized Layout Containers */
+  .site-container {
+    width: 100%;
+    max-width: var(--layout-max-width);
+    margin-inline: auto;
+    padding-inline: var(--container-padding);
+  }
+
+  .section-wrapper {
+    padding-block: var(--section-padding-mobile);
+  }
+
+  @media (min-width: 768px) {
+    .section-wrapper {
+      padding-block: var(--section-padding-tablet);
+    }
+  }
+
+  @media (min-width: 1025px) {
+    .section-wrapper {
+      padding-block: var(--section-padding-desktop);
+    }
+  }
+
+  /* Centralized Button Styles */
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.625rem;
+    min-height: 44px;
+    padding: var(--btn-py) var(--btn-px);
+    background-color: var(--color-primary);
+    color: var(--color-dark-background);
+    font-family: var(--font-body);
+    font-size: var(--btn-font-size);
+    font-weight: 600;
+    letter-spacing: var(--btn-letter-spacing);
+    text-transform: uppercase;
+    white-space: nowrap;
+    flex-shrink: 0;
+    border-radius: var(--btn-radius);
+    transition: background-color 200ms ease, color 200ms ease, border-color 200ms ease;
+    cursor: pointer;
+  }
+
+  .btn-primary:hover {
+    background-color: var(--color-primary-hover);
+  }
+
+  .btn-primary:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+
+  .btn-secondary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.625rem;
+    min-height: 44px;
+    padding: var(--btn-py) var(--btn-px);
+    border-radius: var(--btn-radius);
+    font-family: var(--font-body);
+    font-size: var(--btn-font-size);
+    font-weight: 600;
+    letter-spacing: var(--btn-letter-spacing);
+    text-transform: uppercase;
+    white-space: nowrap;
+    flex-shrink: 0;
+    transition: background-color 200ms ease, color 200ms ease, border-color 200ms ease;
+    cursor: pointer;
+  }
+
+  /* Subtle architectural concrete grid textures */
+  .concrete-grid-pattern {
+    background-image:
+      linear-gradient(to right, rgba(28, 30, 33, 0.04) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(28, 30, 33, 0.04) 1px, transparent 1px);
+    background-size: 64px 64px;
+  }
+
+  .obsidian-grid-pattern {
+    background-image:
+      linear-gradient(to right, rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+    background-size: 64px 64px;
+  }
+}
+
+@media (hover: hover) and (pointer: fine) {
+  body.custom-cursor-active,
+  body.custom-cursor-active a,
+  body.custom-cursor-active button,
+  body.custom-cursor-active [role="button"] {
+    cursor: none !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
